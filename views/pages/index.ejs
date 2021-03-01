@@ -13,15 +13,15 @@
 </head>
 
 <body>
-    <header>
-        <div>
-            <h2>Best Books!</h2>
-            <a href="/searches/new">New Search</a>
-            <img id="settIcon" src="/public/images/menu-icon-png-3-lines-5.jpg" alt="">
-        </div>
-    </header>
+    
+    <%- include('../layout/header') %>
+    
     <main>
-        <p><%=numberOfBooks%> </p>
+   <% if (numberOfBooks) { %>
+    <p>Number Of Books : <%=numberOfBooks%> </p>
+   <% } %>
+            
+  
         <% data.forEach(element=> { %>
             <div>
 
@@ -47,7 +47,7 @@
 
             <% }) %>
     </main>
-    <footer></footer>
+    <%- include('../layout/footer.ejs') %>
     <script
     src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="

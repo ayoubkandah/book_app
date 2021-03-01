@@ -10,4 +10,3 @@ CREATE TABLE books (
  description text
 
 );
-INSERT INTO books(author,title,isbn,image_url,description) VALUES ('$1','$2','$3','$4','$5');

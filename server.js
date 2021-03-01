@@ -6,8 +6,8 @@ const app = express();
 const pg = require("pg")
 
 require("dotenv").config()
-const client = new pg.Client(process.env.DATABASE_URL)
-
+// const client = new pg.Client(process.env.DATABASE_URL)
+const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
 app.use(express.static('./public'));
 
 app.set('view engine', 'ejs')
@@ -130,8 +130,10 @@ function homePage(req, res) {
     let sql = 'select * from books;'
     client.query(sql).then(result => {
         let numberPage;
-        numberPage = result.rows[result.rows.length - 1].id;
 
+        if(result.rows.length>0){
+        numberPage = result.rows[result.rows.length - 1].id;
+        }
 
         res.render("pages/index",
             {
