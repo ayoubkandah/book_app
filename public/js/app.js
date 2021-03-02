@@ -1,7 +1,8 @@
-$('#details').on('click', route)
+"use strict"
+$('#formUpdate').hide();
+$('#updateB').on('click',Show)
 
-function route()
-{
+function Show(){
+    $('#formUpdate').toggle();
 
-console.log('ss');
 }

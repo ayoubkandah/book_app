@@ -29,3 +29,28 @@ footer{
     background-color: black;
     color: white;
 }
+
+#formUpdate *{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}
+
+label{
+   margin-left: 50px;
+}
+#updateB{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+ 
+}
+#deleteForm{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}

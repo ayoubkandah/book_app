@@ -4,7 +4,7 @@ const { get } = require("superagent");
 const su = require("superagent")
 const app = express();
 const pg = require("pg")
-
+const overRide=require("method-override")
 require("dotenv").config()
 // const client = new pg.Client(process.env.DATABASE_URL)
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL,   ssl: { rejectUnauthorized: false } });
@@ -12,18 +12,42 @@ app.use(express.static('./public'));
 
 app.set('view engine', 'ejs')
 
-
 const Port = process.env.PORT || 2000
 app.use(express.urlencoded({ extended: true }));
 app.listen(Port, () => {
 
 })
+app.use(overRide('method'));
+
 client.connect()
 app.get('/', homePage)
 app.post('/searches', getData)
 app.get('/searches/new', newSearch)
 app.get(`/books/:id`, getBookID)
+app.put(`/books/:id`,updateBook)
+app.delete(`/:id`,deleteBook)
 app.post( `/books`,saveData)
+function deleteBook(req,res){
+
+    let sql = `delete from books where id=${req.params.id};`;
+    client.query(sql)
+  res.redirect('/')
+}
+
+function updateBook(req,res){
+    // <!-- author varchar(255),
+    // title varchar(255),
+    // isbn varchar(255),
+    // image_url varchar(255),
+    // description text -->
+    console.log(req.body.title);
+    let { author, title, isbn, image_url, description } = req.body;
+    let sql = `update books set author=$1,title=$2,isbn=$3,image_url=$4,description=$5 WHERE id =${req.params.id};`;
+    let values=[author, title, isbn, image_url, description]
+client.query(sql,values).then(()=>{
+  res.redirect(`/books/${req.params.id}`)
+})
+}
 
 function saveData(req,res){ 
     let Image=req.body.image_url

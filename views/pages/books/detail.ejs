@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/style/reset.css">
     <link rel="stylesheet" href="/style/modules.css">
-    <link rel="stylesheet" href="/style/modules.css">
+    <!-- <link rel="stylesheet" href="/style/odules.css"> -->
     <link rel="stylesheet" href="/style/layout.css">
 </head>
 
@@ -23,11 +23,44 @@
             <p><%=bookDetail.author %> </p>
             <p><%=bookDetail.description %> </p>
             <p><%=bookDetail.isbn %> </p>
-
+            <button id="updateB" >Update Data</button>
+             <form id="deleteForm" action="/<%=bookDetail.id %> ?method=delete" method="POST">
+                
+                <button>Delete</button>
+            </form>
         </div>
+
+        <form id="formUpdate" action='/books/<%=bookDetail.id%>?method=put' method="POST" >
+            <fieldset>
+                
+            <!-- <input type="text" id="custId" name="custId" value="3487"> -->
+            <input type="text" name="author" value="<%=bookDetail.author  %> ">
+            <input type="text" name="title" value="<%=bookDetail.title  %> ">
+            <input type="text" name="isbn" value="<%=bookDetail.isbn  %> ">
+            <input type="text" name="image_url" value="<%=bookDetail.image_url  %> ">
+            <input type="text" name="description" value="<%=bookDetail.description  %> ">
+    
+        <!-- author varchar(255),
+        title varchar(255),
+        isbn varchar(255),
+        image_url varchar(255),
+        description text -->
+        <button>Update</button>
+
+</fieldset>
+        </form>
+
     </main>
     
+   
     <%- include('../../layout/footer.ejs') %>
+
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
+   
 </body>
 
 </html>
