@@ -155,10 +155,10 @@ function homePage(req, res) {
     client.query(sql).then(result => {
         let numberPage;
 
-        if(result.rows.length>0){
-        numberPage = result.rows[result.rows.length - 1].id;
-        }
-
+        // if(result.rows.length>0){
+        // numberPage = result.rows[result.rows.length - 1].id;
+        // }
+        numberPage=result.rowCount
         res.render("pages/index",
             {
                 data: result.rows,
